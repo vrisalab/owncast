@@ -1,3 +1,5 @@
+
+ 
 /*
 Specific styles for main app layout.
 May have overrides for other components with own stylesheets.
@@ -5,7 +7,7 @@ May have overrides for other components with own stylesheets.
 
 /* variables */
 :root {
-  --header-height: 3.5em;
+  --header-height: 8em;
   --right-col-width: 24em;
   --video-container-height: calc((9 / 16) * 100vw);
   --header-bg-color: rgba(20,0,40,1);
@@ -30,9 +32,7 @@ a:hover {
 }
 
 
-#app-container * {
-  transition: all .25s;
-}
+
 
 button[disabled] {
   opacity: .5;
@@ -48,19 +48,6 @@ button[disabled] {
   clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
   clip: rect(1px, 1px, 1px, 1px);
   white-space: nowrap; /* added line */
-}
-
-
-header {
-  height: var(--header-height);
-  background-color: var(--header-bg-color);
-  display: block;
-}
-
-#logo-container {
-  background-size: 1.35em;
-  padding: 1.15rem;
-  background-image: url(/img/logo.svg);
 }
 
 #chat-toggle {
@@ -206,6 +193,21 @@ header {
   max-height: 3em;
 }
 
+/* CUSTOM */
+header {
+  height: var(--header-height);
+  background-color: var(--header-bg-color);
+  display: block;
+  background: url("/img/background/upper.png");
+  background-position-y: -6rem;
+  padding-bottom: 1.2rem;
+}
+
+#app-container * {
+  transition: all .25s;
+  /* background: url("/img/background/bg.png"); */
+}
+
 @media screen and (max-height: 500px) {
   .single-col.touch-screen:not(.touch-keyboard-active) {
     --header-height: 0px;
@@ -213,6 +215,7 @@ header {
   .single-col.touch-screen:not(.touch-keyboard-active) header {
     display: none;
   }
+  
 }
 
 
@@ -231,4 +234,16 @@ header {
     font-size: 1rem;
   }
 
+  #social-list {
+    display: none;
+  }
 }
+
+#logo-container {
+  background-size: 9rem;
+  padding-left: 10rem;
+  background-image: url(/img/logo.png);
+  margin-bottom: 2rem;
+}
+
+

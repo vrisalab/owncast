@@ -1,3 +1,7 @@
+// CUSTOM
+//
+export const OFFLINE_IMAGE = '/img/placeholder.jpg';
+export const USER_LOGO = '/img/user_icon.jpg';
 // misc constants used throughout the app
 
 export const URL_STATUS = `/api/status`;

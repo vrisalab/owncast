@@ -337,7 +337,7 @@ export default class Chat extends Component {
       <section id="chat-container-wrap" class="flex flex-col">
         <div
           id="chat-container"
-          class="bg-gray-800 flex flex-col justify-end overflow-auto"
+          class="flex flex-col justify-end overflow-auto shadow-md"
         >
           <div
             id="messages-container"

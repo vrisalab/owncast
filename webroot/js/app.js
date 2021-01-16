@@ -21,6 +21,8 @@ import {
   setLocalStorage,
 } from './utils/helpers.js';
 import {
+  USER_LOGO,
+  OFFLINE_IMAGE,
   HEIGHT_SHORT_WIDE,
   KEY_CHAT_DISPLAYED,
   KEY_USERNAME,
@@ -381,6 +383,8 @@ export default class App extends Component {
     const {
       version: appVersion,
       logo = TEMP_IMAGE,
+      offline_image = OFFLINE_IMAGE,
+      user_logo = USER_LOGO,
       socialHandles = [],
       name: streamerName,
       summary,
@@ -389,7 +393,7 @@ export default class App extends Component {
       extraPageContent,
     } = configData;
 
-    const bgUserLogo = { backgroundImage: `url(${logo})` };
+    const bgUserLogo = { backgroundImage: `url(${user_logo})` };
 
     const tagList = (tags !== null && tags.length > 0)
       ? tags.map(
@@ -413,14 +417,14 @@ export default class App extends Component {
       chat: displayChat,
       'no-chat': !displayChat,
       'single-col': singleColMode,
-      'bg-gray-800': singleColMode && displayChat,
+      //'bg-gray-800': singleColMode && displayChat,
       'short-wide': shortHeight && windowWidth > WIDTH_SINGLE_COL,
       'touch-screen': this.hasTouchScreen,
       'touch-keyboard-active': touchKeyboardActive,
     });
 
     const poster = isPlaying ? null : html`
-      <${VideoPoster} offlineImage=${logo} active=${streamOnline} />
+      <${VideoPoster} offlineImage=${offline_image} active=${streamOnline} />
     `;
 
     return html`
@@ -430,25 +434,26 @@ export default class App extends Component {
       >
         <div id="top-content" class="z-50">
           <header
-            class="flex border-b border-gray-900 border-solid shadow-md fixed z-10 w-full top-0	left-0 flex flex-row justify-between flex-no-wrap"
+            class="flex fixed z-10 w-full top-0	left-0 flex flex-row justify-between flex-no-wrap"
           >
             <h1
               class="flex flex-row items-center justify-start p-2 uppercase text-gray-400 text-xl	font-thin tracking-wider overflow-hidden whitespace-no-wrap"
             >
               <span
                 id="logo-container"
-                class="inline-block	rounded-full bg-white w-8 min-w-8 min-h-8 h-8 mr-2 bg-no-repeat bg-center"
+                class="inline-block w-8 min-w-15 min-h-8 h-20 mr-2 bg-no-repeat bg-center"
               >
                 <img class="logo visually-hidden" src=${OWNCAST_LOGO_LOCAL} alt="owncast logo" />
               </span>
-              <span class="instance-title overflow-hidden truncate"
+              <!-- <span class="instance-title overflow-hidden truncate"
                 >${title}</span
-              >
+              > -->
             </h1>
             <div
               id="user-options-container"
               class="flex flex-row justify-end items-center flex-no-wrap"
             >
+              <${SocialIconsList} handles=${socialHandles} />
               <${UsernameForm}
                 username=${username}
                 onUsernameChange=${this.handleUsernameChange}
@@ -459,7 +464,7 @@ export default class App extends Component {
                 type="button"
                 id="chat-toggle"
                 onClick=${this.handleChatPanelToggle}
-                class="flex cursor-pointer text-center justify-center items-center min-w-12 h-full bg-gray-800 hover:bg-gray-700"
+                class="flex cursor-pointer text-center justify-center items-center min-w-12 h-full "
               >
                 💬
               </button>
@@ -491,7 +496,7 @@ export default class App extends Component {
             <span id="stream-viewer-count">${viewerCount} ${pluralize('viewer', viewerCount)}.</span>
           </section>
         </main>
-
+        <div id="stream-info-container">
         <section id="user-content" aria-label="User information" class="p-8">
           <div class="user-content flex flex-row p-8">
             <div
@@ -501,14 +506,14 @@ export default class App extends Component {
               <img class="logo visually-hidden" alt="" src=${logo} />
             </div>
             <div
-              class="user-content-header border-b border-gray-500 border-solid"
+              class="user-content-header border-b border-black  border-solid"
             >
               <h2 class="font-semibold text-5xl">
                 <span class="streamer-name text-indigo-600"
                   >${streamerName}</span
                 >
               </h2>
-              <${SocialIconsList} handles=${socialHandles} />
+             
               <div
                 id="stream-summary"
                 class="stream-summary my-4"
@@ -532,13 +537,15 @@ export default class App extends Component {
           </span>
           <span class="mx-1 inline-block">Version ${appVersion}</span>
         </footer>
-
+        </div>
+            <div id="chat-super-container">
         <${Chat}
           websocket=${websocket}
           username=${username}
           chatInputEnabled=${chatInputEnabled}
           instanceTitle=${title}
         />
+        </div>
       </div>
     `;
   }

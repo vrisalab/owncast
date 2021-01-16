@@ -1,15 +1,5 @@
 /* some base styles for chat and messaging components */
 
-#chat-container {
-  position: fixed;
-  z-index: 9;
-  bottom: 0;
-  right: 0;
-  width: var(--right-col-width);
-
-  height: calc(100vh - var(--header-height));
-}
-
 @media screen and (max-width: 729px) {
   #chat-container {
     top: var(--header-height);
@@ -180,4 +170,20 @@
 /* MESSAGE TEXT CONTENT */
 /* MESSAGE TEXT CONTENT */
 /* MESSAGE TEXT CONTENT */
+/* CUSTOM */
+#chat-super-container {
+
+}
+
+#chat-container {
+  position: fixed;
+  z-index: 9;
+  bottom: 0;
+  right: 0;
+  width: var(--right-col-width);
+  height: calc(100vh - var(--header-height));
+  background: url("/img/background/bg.png");
+}
+
+/* The chat-container on js/chat/chat.js must be border-l border-solid border-white, or shadow-md */
 
